@@ -167,14 +167,17 @@ python scripts/train.py \
 ## 📝 Citation
 
 ```bibtex
-@misc{flownfsw2026,
-  title={FlowNSFW: Optical Flow and Mamba SSM for Video NSFW Detection},
-  author={Your Name},
-  year={2026},
-  note={96.4\% accuracy on 224-video benchmark},
-  url={https://github.com/yourusername/FlowNSFW}
+@software{flownfsw2026,
+  title = {FlowNSFW: Optical Flow and Mamba SSM for Video NSFW Detection},
+  author = {Moran, V.},
+  year = {2026},
+  version = {1.0.0},
+  url = {https://github.com/vmoranv/FlowNSFW},
+  note = {96.4\% accuracy on 224-video benchmark}
 }
 ```
+
+**GitHub Citation**: Click "Cite this repository" in the About section.
 
 ---
 
@@ -197,9 +200,12 @@ MIT License. See [LICENSE](LICENSE) for details.
 ## 🔗 Links
 
 - **Paper**: [Coming soon]
-- **Weights**: [GitHub Releases](https://github.com/yourusername/FlowNSFW/releases)
-- **Demo**: [Colab Notebook](https://colab.research.google.com/...)
-- **Issues**: [GitHub Issues](https://github.com/yourusername/FlowNSFW/issues)
+- **Weights**: [GitHub Releases](https://github.com/vmoranv/FlowNSFW/releases)
+- **Resources**: [RESOURCES.md](RESOURCES.md) - Model zoo, datasets, related work
+- **Contributing**: [CONTRIBUTING.md](CONTRIBUTING.md) - How to contribute
+- **Security**: [SECURITY.md](SECURITY.md) - Security policy & best practices
+- **Changelog**: [CHANGELOG.md](CHANGELOG.md) - Version history
+- **Issues**: [GitHub Issues](https://github.com/vmoranv/FlowNSFW/issues)
 
 ---
 

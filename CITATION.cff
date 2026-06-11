@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "FlowNSFW: Optical Flow and Mamba SSM for Video NSFW Detection"
+version: 1.0.0
+date-released: 2026-06-11
+url: "https://github.com/vmoranv/FlowNSFW"
+repository-code: "https://github.com/vmoranv/FlowNSFW"
+license: MIT
+authors:
+  - family-names: "Moran"
+    given-names: "V."
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+keywords:
+  - "video classification"
+  - "nsfw detection"
+  - "optical flow"
+  - "mamba"
+  - "state space models"
+  - "deep learning"
+  - "pytorch"
+abstract: >
+  FlowNSFW is a lightweight video NSFW detection model that achieves
+  96.4% accuracy by capturing motion patterns through optical flow
+  and Mamba SSM temporal modeling. The model outperforms single-frame
+  detectors by 26 percentage points, demonstrating that NSFW detection
+  is fundamentally a motion pattern recognition task rather than
+  static object detection.
