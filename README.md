@@ -14,10 +14,13 @@ FlowNSFW is a lightweight video NSFW detection model that captures **motion patt
 
 ## 🎯 Key Results
 
+![Performance Comparison](assets/performance_comparison.png)
+
 | Model | Accuracy | NSFW Recall | SFW Accuracy | Speed |
 |-------|----------|-------------|--------------|-------|
 | **FlowNSFW** | **96.4%** | **98.3%** | **94.0%** | 411ms |
 | YOLOv11 v16_s | 70.0% | 60.0% | 82.0% | 265ms |
+| YOLOv11 auto_v14 | 64.5% | 41.7% | 92.0% | 332ms |
 | Traditional ML | 55.4% | 100.0% | 0.0% | 150ms |
 
 **Why FlowNSFW wins**: Motion-dependent NSFW content is invisible in single frames. Flow + Mamba sees what frame-based detectors miss.

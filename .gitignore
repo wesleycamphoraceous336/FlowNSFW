@@ -9,7 +9,7 @@ dist/
 build/
 *.egg
 
-# PyTorch
+# PyTorch models and checkpoints
 *.pt
 *.pth
 *.ckpt
@@ -21,8 +21,9 @@ logs/
 checkpoints/
 *.log
 *.csv
+output_boxes/
 
-# Data
+# Data - KEEP OUT OF REPO
 datasets/
 data/
 *.mp4
@@ -30,6 +31,19 @@ data/
 *.jpg
 *.png
 *.webp
+*.json
+
+# Delivery packages - DEVELOPMENT ONLY
+delivery_package/
+flow_nsfw_a10_package/
+flow_nsfw_v10/
+amd_deploy/
+*.tar.gz
+*.zip
+output.zip
+
+# Config overrides
+configs/
 
 # IDE
 .vscode/
@@ -52,5 +66,17 @@ ENV/
 *.tmp
 *.bak
 .cache/
-*.tar.gz
-*.zip
+
+# Test artifacts
+test_fresh/
+baselines/
+
+# Build scripts
+build_*.py
+fix_*.py
+fix_*.sh
+test_*.py
+
+# Documentation scratch
+*_SUMMARY.md
+PRE_*.md
