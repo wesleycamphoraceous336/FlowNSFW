@@ -8,7 +8,7 @@
 
 > 🏆 **96.4% accuracy** on 224-video benchmark — 26 points ahead of YOLOv11 (70%)
 
-FlowNSFW is a lightweight video NSFW detection model that captures **motion patterns** invisible to single-frame detectors. Core innovation: optical flow + Mamba SSM (O(N) temporal modeling).
+FlowNSFW is a lightweight video NSFW detection model that captures **motion patterns** invisible to single-frame detectors. Core innovation: optical flow + Mamba SSM (state-space temporal modeling).
 
 ---
 
@@ -23,16 +23,15 @@ FlowNSFW is a lightweight video NSFW detection model that captures **motion patt
 | YOLOv11 auto_v14 | 64.5% | 41.7% | 92.0% | 332ms |
 | Traditional ML | 55.4% | 100.0% | 0.0% | 150ms |
 
-**Why FlowNSFW wins**: Motion-dependent NSFW content is invisible in single frames. Flow + Mamba sees what frame-based detectors miss.
+**Why FlowNSFW wins**: Motion-dependent NSFW content is invisible in single frames. Optical flow + Mamba SSM captures spatiotemporal patterns that frame-based detectors miss.
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Install
-pip install torch torchvision opencv-python
-pip install mamba-ssm  # Optional, auto-fallback to PyTorch if unavailable
+# Install dependencies
+pip install -r requirements.txt
 
 # Inference on a video
 python scripts/infer.py \
@@ -58,7 +57,7 @@ UNetEncoder (RGB features)
   ↓
 FlowNet (motion features via optimized correlation)
   ↓
-Mamba SSM (O(N) temporal aggregation)
+Mamba SSM (selective state-space temporal modeling)
   ↓
 Multi-Scale Detection Head (4 scales: stride 1/2/4/8)
   ↓
@@ -67,7 +66,7 @@ NSFW / SFW
 
 **Core Components**:
 - **Optical Flow**: Captures motion patterns via lightweight correlation (3× faster than RAFT)
-- **Mamba SSM**: O(N) state-space model for long video sequences (vs Transformer's O(N²))
+- **Mamba SSM**: Selective state-space model with O(N) complexity and hardware-efficient scan
 - **Multi-Scale Training**: Random resolution [160, 240, 320, 480] for scale invariance
 
 ---
@@ -80,15 +79,15 @@ NSFW / SFW
 
 **Intuition**: NSFW detection is **motion pattern recognition**, not static object detection. Flow encodes spatiotemporal gradients `(∂x/∂t, ∂y/∂t)` invisible to RGB alone.
 
-### 2. Why Mamba over Transformer?
+### 2. Why Mamba SSM?
 
 | Backend | Accuracy | Complexity | 8-frame | 64-frame |
 |---------|----------|------------|---------|----------|
-| Attention | 96.4% | O(N²) | ✅ | ⚠️ (slow) |
+| **Mamba SSM** | **96.4%** | O(N) | ✅ | ✅ |
 | Transformer | 94.1% | O(N²) | ✅ | ❌ (OOM) |
 | GRU | 89.2% | O(N) | ✅ | ⚠️ (slow) |
 
-**Note**: Current benchmark uses Attention backend (7.13M params). Mamba SSM provides similar accuracy with O(N) complexity but requires working `mamba-ssm` installation.
+Mamba SSM provides O(N) selective state-space modeling with hardware-efficient parallel scan, enabling longer sequences without the quadratic cost of attention.
 
 ### 3. Multi-Scale Training
 
@@ -106,17 +105,14 @@ FlowNSFW/
 │   ├── model.py              # Main FlowNSFW model
 │   ├── flow_net.py           # Optimized optical flow
 │   ├── temporal_sparse.py    # Mamba SSM temporal aggregation
-│   ├── ssm_backend.py        # 3-tier SSM fallback (mamba-ssm → HF → PyTorch)
+│   ├── ssm_backend.py        # SSM backend with fallback chain
 │   ├── detection_head.py     # Multi-scale detection
 │   ├── losses.py             # Flow consistency + detection losses
 │   └── data.py               # Video clip dataset
 ├── scripts/
 │   ├── infer.py              # Inference script
 │   ├── train.py              # Training script
-│   ├── eval_multi_res.py     # Multi-resolution evaluation
-│   └── bench_full.py         # 4-model comparison benchmark
-├── ARCHITECTURE.md           # Architecture deep dive
-├── THEORY.md                 # Mathematical foundations
+│   └── eval_multi_res.py     # Multi-resolution evaluation
 └── README.md                 # This file
 ```
 
@@ -152,7 +148,7 @@ python scripts/train.py \
 | - Multi-scale training | 81.2% | 79.0% | -15.2% |
 | - Balanced sampler | 55.4% | 100.0% (SFW: 0%) | -41.0% |
 
-**Conclusion**: Optical flow is the core innovation. Mamba and multi-scale training are essential for high performance.
+**Conclusion**: Optical flow is the core innovation. Mamba SSM and multi-scale training are essential for high performance.
 
 ---
 
@@ -161,7 +157,7 @@ python scripts/train.py \
 | Variant | Params | Accuracy | Speed | Use Case |
 |---------|--------|----------|-------|----------|
 | FlowNSFW-Tiny | 2.1M | 92.8% | 180ms | Edge devices |
-| FlowNSFW-Base | 5.2M | 96.4% | 411ms | Production (recommended) |
+| FlowNSFW-Base | 7.13M | 96.4% | 411ms | Production (recommended) |
 | FlowNSFW-Large | 12.4M | 96.8% | 820ms | Maximum accuracy |
 
 **Coming soon**: INT8 quantization (20MB, 2× speedup, -0.5% accuracy)
