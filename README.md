@@ -110,9 +110,11 @@ FlowNSFW/
 │   ├── losses.py             # Flow consistency + detection losses
 │   └── data.py               # Video clip dataset
 ├── scripts/
-│   ├── infer.py              # Inference script
 │   ├── train.py              # Training script
-│   └── eval_multi_res.py     # Multi-resolution evaluation
+│   ├── infer.py              # Inference script
+│   ├── eval_multi_res.py     # Multi-resolution evaluation
+│   ├── test_smoke.py         # Smoke test
+│   └── generate_figures.py   # Performance visualization
 └── README.md                 # This file
 ```
 
@@ -149,18 +151,6 @@ python scripts/train.py \
 | - Balanced sampler | 55.4% | 100.0% (SFW: 0%) | -41.0% |
 
 **Conclusion**: Optical flow is the core innovation. Mamba SSM and multi-scale training are essential for high performance.
-
----
-
-## 🛠️ Model Variants
-
-| Variant | Params | Accuracy | Speed | Use Case |
-|---------|--------|----------|-------|----------|
-| FlowNSFW-Tiny | 2.1M | 92.8% | 180ms | Edge devices |
-| FlowNSFW-Base | 7.13M | 96.4% | 411ms | Production (recommended) |
-| FlowNSFW-Large | 12.4M | 96.8% | 820ms | Maximum accuracy |
-
-**Coming soon**: INT8 quantization (20MB, 2× speedup, -0.5% accuracy)
 
 ---
 
